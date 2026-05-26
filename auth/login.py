@@ -1,20 +1,30 @@
 """Authentication logic for the Accounts Payable System."""
 
 from __future__ import annotations
-import os
-import hashlib
 
-VALID_USERNAME = "admin"
-VALID_PASSWORD_HASH = hash_password("admin123")
+import hashlib
+import os
+
+from dotenv import load_dotenv
+
+# Load environment variables from .env
+load_dotenv()
+
 
 def hash_password(password: str) -> str:
     """Return the SHA-256 hash of the provided plaintext password."""
     if password is None:
         raise ValueError("password is required")
+
     try:
         return hashlib.sha256(password.encode()).hexdigest()
     except Exception as exc:
         raise ValueError(f"Failed to hash password: {exc}") from exc
+
+
+# Load credentials from environment variables
+VALID_USERNAME = os.getenv("APP_USERNAME")
+VALID_PASSWORD_HASH = os.getenv("APP_PASSWORD_HASH")
 
 
 def authenticate_user(username: str, password: str) -> bool:
