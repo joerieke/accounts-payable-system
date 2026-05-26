@@ -153,3 +153,4 @@ The focus of this repository is:
 # License
 
 This project is provided for educational and portfolio purposes.
+This repository was used to learn Git and GitHub workflow fundamentals.
